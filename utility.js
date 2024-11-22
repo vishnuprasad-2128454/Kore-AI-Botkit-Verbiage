@@ -2,10 +2,11 @@ module.exports = {
   populateBotResponse: function (
     vbResponse,
     responseId,
-    entityStatus,
-    failedEntity
+    messageDataWithBotUserSession
   ) {
     const verbiage_builder_resp = vbResponse;
+    let entityStatus = messageDataWithBotUserSession.entity_status;
+     let failedEntity = messageDataWithBotUserSession.failedEntity;
     let orderIdInput = "";
     let result = verbiage_builder_resp.filter(
       (ele) => ele.RESPONSE_ID === responseId
