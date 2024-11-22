@@ -11,63 +11,73 @@ module.exports = {
     let result = verbiage_builder_resp.filter(
       (ele) => ele.RESPONSE_ID === responseId
     );
+    let temp = [];
     //hook to add custom events
     switch (responseId) {
       case "ESI_PHA_ORD_INFO_ASK_ORD_TITLE":
-        return msgTemplate(result);
+        temp.push(result);
+        return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_CNFN_MSG":
-        return msgTemplate(result);
-
+        temp.push(result);
+        return msgTemplate(temp);
+        
       case "ESI_PHA_ORD_INFO_ASK_ORD_ID":
-        return msgTemplate(result);
+        temp.push(result);
+        return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_ORD_ID_RESP":
         orderIdInput = entityStatus;
-
-        let str = result[0].WEB_RESPONSE_MSG.replaceAll(
+         temp.push(result);
+        let str = temp[0].WEB_RESPONSE_MSG.replaceAll(
           "${order_status}",
           orderIdInput
         );
-        result[0].WEB_RESPONSE_MSG = str;
-        return msgTemplate(result);
+        temp[0].WEB_RESPONSE_MSG = str;
+        return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_ORD_FALLBACK":
-        return msgTemplate(result);
+        temp.push(result);
+        return msgTemplate(temp);
       case "ESI_PHA_ORD_INFO_ASK_MEMBER_ID":
-        return msgTemplate(result);
+        temp.push(result);
+        return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_CNFN_ERROR_MSG":
-        return msgTemplate(result);
+        temp.push(result);
+        return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_MEMBER_ID_RESP":
         let memberIdInput = entityStatus;
-        let memberStr = result[0].WEB_RESPONSE_MSG.replaceAll(
+        temp.push(result);
+        let memberStr = temp[0].WEB_RESPONSE_MSG.replaceAll(
           "${member_status}",
           memberIdInput
         );
-        result[0].WEB_RESPONSE_MSG = memberStr;
-        return msgTemplate(result);
+         temp[0].WEB_RESPONSE_MSG = memberStr;
+        return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_INVALID_MSG":
         // let failedEntityInput = failedEntity === "OrderId" ? "Order Id" : "Member Id";
         if (failedEntity !== null) {
+          temp.push(result);
           let failedEntityInputStr =
             failedEntity === "Order Id"
-              ? result[0].WEB_RESPONSE_MSG.replaceAll(
+              ? temp[0].WEB_RESPONSE_MSG.replaceAll(
                   "${dynamic_entity}",
                   failedEntity
                 )
-              : result[0].WEB_RESPONSE_MSG.replaceAll(
+              : temp[0].WEB_RESPONSE_MSG.replaceAll(
                   "${dynamic_entity}",
                   failedEntity
                 );
-          result[0].WEB_RESPONSE_MSG = failedEntityInputStr;
-          return msgTemplate(result);
+          temp[0].WEB_RESPONSE_MSG = failedEntityInputStr;
+          return msgTemplate(temp);
         }
 
       case "ESI_PHA_ORD_INFO_MAX_NO_ATTEMPTS_MSG":
-        return msgTemplate(result);
+          temp.push(result);
+        return msgTemplate(temp);
 
       default:
         return responseId;
