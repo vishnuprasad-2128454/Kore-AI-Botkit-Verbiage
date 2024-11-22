@@ -30,7 +30,7 @@ module.exports = {
       case "ESI_PHA_ORD_INFO_ORD_ID_RESP":
         orderIdInput = entityStatus;
          temp.push(result);
-        let str = temp[0].WEB_RESPONSE_MSG.replaceAll(
+        let str = temp[0][0].WEB_RESPONSE_MSG.replaceAll(
           "${order_status}",
           orderIdInput
         );
@@ -51,7 +51,7 @@ module.exports = {
       case "ESI_PHA_ORD_INFO_MEMBER_ID_RESP":
         let memberIdInput = entityStatus;
         temp.push(result);
-        let memberStr = temp[0].WEB_RESPONSE_MSG.replaceAll(
+        let memberStr = temp[0][0].WEB_RESPONSE_MSG.replaceAll(
           "${member_status}",
           memberIdInput
         );
@@ -64,15 +64,15 @@ module.exports = {
           temp.push(result);
           let failedEntityInputStr =
             failedEntity === "Order Id"
-              ? temp[0].WEB_RESPONSE_MSG.replaceAll(
+              ? temp[0][0].WEB_RESPONSE_MSG.replaceAll(
                   "${dynamic_entity}",
                   failedEntity
                 )
-              : temp[0].WEB_RESPONSE_MSG.replaceAll(
+              : temp[0][0].WEB_RESPONSE_MSG.replaceAll(
                   "${dynamic_entity}",
                   failedEntity
                 );
-          temp[0].WEB_RESPONSE_MSG = failedEntityInputStr;
+          temp[0][0].WEB_RESPONSE_MSG = failedEntityInputStr;
           return msgTemplate(temp);
         }
 
@@ -86,8 +86,8 @@ module.exports = {
   },
 };
 function msgTemplate(templateData) {
-  const templateType = templateData[0]?.MEDIA_TYPE;
-  const tableTemplate = templateData[0]?.DATA
+  const templateType = templateData[0][0]?.MEDIA_TYPE;
+  const tableTemplate = templateData[0][0]?.DATA
     ? [
         {
           type: "text",
@@ -105,7 +105,7 @@ function msgTemplate(templateData) {
       ]
     : null;
 
-  const dafaultTextTemplate = templateData[0]?.WEB_RESPONSE_MSG;
+  const dafaultTextTemplate = templateData[0][0]?.WEB_RESPONSE_MSG;
 
   switch (templateType) {
     case "TABLE":
