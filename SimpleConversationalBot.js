@@ -38,7 +38,7 @@ module.exports = {
     }
     console.log("verbiage_builder_resp", verbiage_En_RespData);
     //Sends back the message to user
-    const currentLanguage = context.currentLanguage;
+    const currentLanguage = data.context.currentLanguage;
     const verbiageBuilderData =
       currentLanguage === "en" ? verbiage_En_RespData : verbiage_Fr_RespData;
     data.message = populateBotResponse(
