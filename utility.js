@@ -1,3 +1,5 @@
+const { verbiageBuilder } = require("./verbiageBuilder");
+
 module.exports = {
   populateBotResponse: function (
     vbResponse,
@@ -72,6 +74,9 @@ module.exports = {
         return responseId;
     }
   },
+  resetExcelData: function(){
+    verbiage_En_RespData = verbiageBuilder("ESI_PHA_BOT_RESP_BUILDER_EN_CA.xlsx");
+  }
 };
 function msgTemplate(templateData) {
   const templateType = templateData[0]?.MEDIA_TYPE;
