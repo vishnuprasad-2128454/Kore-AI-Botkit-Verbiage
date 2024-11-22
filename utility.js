@@ -11,74 +11,62 @@ module.exports = {
     let result = verbiage_builder_resp.filter(
       (ele) => ele.RESPONSE_ID === responseId
     );
-    let temp = [];
     //hook to add custom events
     switch (responseId) {
       case "ESI_PHA_ORD_INFO_ASK_ORD_TITLE":
-        temp.push(result);
-        console.log("temp",temp);
-        return msgTemplate(temp);
+        return msgTemplate(result);
 
       case "ESI_PHA_ORD_INFO_CNFN_MSG":
-        temp.push(result);
-        return msgTemplate(temp);
+        return msgTemplate(result);
         
       case "ESI_PHA_ORD_INFO_ASK_ORD_ID":
-        temp.push(result);
-        return msgTemplate(temp);
+        return msgTemplate(result);
 
       case "ESI_PHA_ORD_INFO_ORD_ID_RESP":
         orderIdInput = entityStatus;
-         temp.push(result);
-        let str = temp[0][0].WEB_RESPONSE_MSG.replaceAll(
+        let str = result[0].WEB_RESPONSE_MSG.replaceAll(
           "${order_status}",
           orderIdInput
         );
-        temp[0][0].WEB_RESPONSE_MSG = str;
-        return msgTemplate(temp);
+        result[0].WEB_RESPONSE_MSG = str;
+        return msgTemplate(result);
 
       case "ESI_PHA_ORD_INFO_ORD_FALLBACK":
-        temp.push(result);
-        return msgTemplate(temp);
+        return msgTemplate(result);
       case "ESI_PHA_ORD_INFO_ASK_MEMBER_ID":
-        temp.push(result);
-        return msgTemplate(temp);
+        return msgTemplate(result);
 
       case "ESI_PHA_ORD_INFO_CNFN_ERROR_MSG":
-        temp.push(result);
-        return msgTemplate(temp);
+        return msgTemplate(result);
 
       case "ESI_PHA_ORD_INFO_MEMBER_ID_RESP":
         let memberIdInput = entityStatus;
-        temp.push(result);
-        let memberStr = temp[0][0].WEB_RESPONSE_MSG.replaceAll(
+        let memberStr = result[0].WEB_RESPONSE_MSG.replaceAll(
           "${member_status}",
           memberIdInput
         );
-         temp[0][0].WEB_RESPONSE_MSG = memberStr;
-        return msgTemplate(temp);
+         result[0].WEB_RESPONSE_MSG = memberStr;
+        return msgTemplate(result);
 
       case "ESI_PHA_ORD_INFO_INVALID_MSG":
         // let failedEntityInput = failedEntity === "OrderId" ? "Order Id" : "Member Id";
         if (failedEntity !== null) {
-          temp.push(result);
           let failedEntityInputStr =
             failedEntity === "Order Id"
-              ? temp[0][0].WEB_RESPONSE_MSG.replaceAll(
+              ? result[0].WEB_RESPONSE_MSG.replaceAll(
                   "${dynamic_entity}",
                   failedEntity
                 )
-              : temp[0][0].WEB_RESPONSE_MSG.replaceAll(
+              : result[0].WEB_RESPONSE_MSG.replaceAll(
                   "${dynamic_entity}",
                   failedEntity
                 );
-          temp[0][0].WEB_RESPONSE_MSG = failedEntityInputStr;
-          return msgTemplate(temp);
+          result[0].WEB_RESPONSE_MSG = failedEntityInputStr;
+          return msgTemplate(result);
         }
 
       case "ESI_PHA_ORD_INFO_MAX_NO_ATTEMPTS_MSG":
-          temp.push(result);
-        return msgTemplate(temp);
+        return msgTemplate(result);
 
       default:
         return responseId;
@@ -86,8 +74,8 @@ module.exports = {
   },
 };
 function msgTemplate(templateData) {
-  const templateType = templateData[0][0]?.MEDIA_TYPE;
-  const tableTemplate = templateData[0][0]?.DATA
+  const templateType = templateData[0]?.MEDIA_TYPE;
+  const tableTemplate = templateData[0]?.DATA
     ? [
         {
           type: "text",
@@ -95,7 +83,7 @@ function msgTemplate(templateData) {
             type: "template",
             payload: {
               template_type: "table",
-              ...JSON.parse(templateData[0][0]?.DATA),
+              ...JSON.parse(templateData[0]?.DATA),
             },
           },
           cInfo: {
@@ -105,7 +93,7 @@ function msgTemplate(templateData) {
       ]
     : null;
 
-  const dafaultTextTemplate = templateData[0][0]?.WEB_RESPONSE_MSG;
+  const dafaultTextTemplate = templateData[0]?.WEB_RESPONSE_MSG;
 
   switch (templateType) {
     case "TABLE":
