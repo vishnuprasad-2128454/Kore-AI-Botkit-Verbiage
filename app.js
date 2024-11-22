@@ -5,17 +5,7 @@ var config = require("./config");
 
 var app = new Application(null, config);
 var server = new Server(config, app);
-var routes = require("./routes/index");
 const verbiageBuilder = require("./verbiageBuilder");
-const cors = require("cors");
-
-const corsOptions = {
-  origin: "*",
-  credentials: true,
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
-app.use("/api/botdata", routes);
 sdk.checkNodeVersion();
 
 verbiage_En_RespData = verbiageBuilder("ESI_PHA_BOT_RESP_BUILDER_EN_CA.xlsx");
