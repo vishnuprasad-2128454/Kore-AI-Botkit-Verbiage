@@ -16,6 +16,7 @@ module.exports = {
     switch (responseId) {
       case "ESI_PHA_ORD_INFO_ASK_ORD_TITLE":
         temp.push(result);
+        console.log("temp",temp);
         return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_CNFN_MSG":
