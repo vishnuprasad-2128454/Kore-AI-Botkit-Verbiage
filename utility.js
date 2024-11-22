@@ -34,7 +34,7 @@ module.exports = {
           "${order_status}",
           orderIdInput
         );
-        temp[0].WEB_RESPONSE_MSG = str;
+        temp[0][0].WEB_RESPONSE_MSG = str;
         return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_ORD_FALLBACK":
@@ -55,7 +55,7 @@ module.exports = {
           "${member_status}",
           memberIdInput
         );
-         temp[0].WEB_RESPONSE_MSG = memberStr;
+         temp[0][0].WEB_RESPONSE_MSG = memberStr;
         return msgTemplate(temp);
 
       case "ESI_PHA_ORD_INFO_INVALID_MSG":
@@ -95,7 +95,7 @@ function msgTemplate(templateData) {
             type: "template",
             payload: {
               template_type: "table",
-              ...JSON.parse(templateData[0]?.DATA),
+              ...JSON.parse(templateData[0][0]?.DATA),
             },
           },
           cInfo: {
