@@ -32,6 +32,7 @@ module.exports = {
     }
   },
   on_bot_message: function (requestId, data, callback) {
+     resetExcelData();
     if (data.message === "hi") {
       data.message = "The Bot says hello!";
       console.log("bot message", data.message);
@@ -47,7 +48,6 @@ module.exports = {
       data.context.session.BotUserSession
     );
     console.log("bot message", data.message);
-    resetExcelData();
     return sdk.sendUserMessage(data, callback);
   },
   on_agent_transfer: function (requestId, data, callback) {
