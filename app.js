@@ -5,7 +5,6 @@ var config = require("./config");
 
 var app = new Application(null, config);
 var server = new Server(config, app);
-var router = express.Router();
 var routes = require("./routes/index");
 const verbiageBuilder = require("./verbiageBuilder");
 const cors = require("cors");
