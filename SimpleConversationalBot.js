@@ -47,6 +47,7 @@ module.exports = {
       data.context.session.BotUserSession
     );
     console.log("bot message", data.message);
+    resetExcelData();
     return sdk.sendUserMessage(data, callback);
   },
   on_agent_transfer: function (requestId, data, callback) {
