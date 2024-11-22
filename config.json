@@ -1,0 +1,33 @@
+{
+    "server": {
+        "port": 8003
+    },
+    "app": {
+        "apiPrefix" : "",
+        "url": "https://cai-tripsy-bot.onrender.com"
+    },
+    "validations": {
+        "leastNodeVersion": 10
+    },
+    "credentials": {
+        "apikey": "Opy0vkwqeb3+qobIWWnuXtRQLgkw/KooRtpUFrH4SIg=",
+        "appId": "cs-365bff0f-4ab9-520c-acb4-e709b64e1ab8"
+    },
+    "jwt": {
+        "jwtAlgorithm": "HS256",
+        "jwt-expiry": 300
+    },
+    "redis": {
+        "options": {
+            "host": "localhost",
+            "port": 6379
+        },
+        "available": false
+    },
+    "examples" : {
+        "mockServicesHost"  : "http://localhost:8004"
+    },
+    "liveagentlicense": "8947569",
+    "supportsMessageAck": true,
+    "languages":["en","de"]
+}
