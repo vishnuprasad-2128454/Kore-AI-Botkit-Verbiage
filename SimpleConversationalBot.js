@@ -33,7 +33,7 @@ module.exports = {
     }
   },
   on_bot_message: function (requestId, data, callback) {
-     // resetExcelData();
+     resetExcelData();
     if (data.message === "hi") {
       data.message = "The Bot says hello!";
       console.log("bot message", data.message);
