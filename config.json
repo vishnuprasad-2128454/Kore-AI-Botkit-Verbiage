@@ -4,7 +4,7 @@
     },
     "app": {
         "apiPrefix" : "",
-        "url": "https://cai-tripsy-bot.onrender.com"
+        "url": "https://kore-ai-botkit-verbiage-b59h.onrender.com"
     },
     "validations": {
         "leastNodeVersion": 10
