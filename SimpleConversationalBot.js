@@ -1,5 +1,6 @@
-var botId = "st-5ce0721c-5c5e-56b0-a0ba-cac19303c9a5";
-var botName = "OrderManage";
+var botId = "st-65282a6b-a83d-50bb-be52-70fa4c81b043";
+var botName = "ESI Canada Bot";
+
 var sdk = require("./lib/sdk");
 const xlsx = require("node-xlsx").default;
 const fs = require("fs");
